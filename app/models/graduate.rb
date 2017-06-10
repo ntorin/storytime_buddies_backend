@@ -1,2 +1,0 @@
-class Graduate < ApplicationRecord
-end
