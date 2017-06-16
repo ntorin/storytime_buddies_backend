@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
+  devise_for :users, controllers: { sessions: 'users/sessions' }
   mount API::Base, at: "/"
   mount GrapeSwaggerRails::Engine, at: "/documentation"
+
+  devise_scope :user do
+    get 'sign_in', to: 'devise/sessions#new'
+  end
 
   root 'home#index'
 

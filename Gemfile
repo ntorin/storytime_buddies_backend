@@ -43,12 +43,20 @@ gem 'react-rails', github: 'vipulnsward/react-rails', branch: 'sprockets-3-compa
 # Add support to use es6 based on top of babel, instead of using coffeescript
 gem 'sprockets-es6'
 
-# For APIs
+# APIs
 gem 'grape'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'grape-active_model_serializers'
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
+
+# Authorization
+gem 'devise'
+gem 'cancancan', '~> 1.10'
+
+
+# Tokens
+gem 'doorkeeper'
 
 # For renaming skeleton project
 gem 'rename'
