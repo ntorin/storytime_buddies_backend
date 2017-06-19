@@ -35,6 +35,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'bootstrap-sass'
 
 # react-rails isn't compatible yet with latest Sprockets.
 # https://github.com/reactjs/react-rails/pull/322
@@ -52,11 +53,9 @@ gem 'grape-swagger-rails'
 
 # Authorization
 gem 'devise'
+gem 'simple_token_authentication', '~> 1.0' # see semver.org
 gem 'cancancan', '~> 1.10'
 
-
-# Tokens
-gem 'doorkeeper'
 
 # For renaming skeleton project
 gem 'rename'
