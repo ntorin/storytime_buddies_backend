@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  #before_action :authenticate_user!
-  #before_action :admin_only, :except => :show
+  load_and_authorize_resource
 
   def index
     @users = User.all
