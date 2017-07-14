@@ -54,6 +54,8 @@ gem 'grape-swagger-rails'
 # Authorization
 gem 'devise'
 gem 'cancancan', '~> 1.10'
+gem 'devise_token_auth'
+gem 'omniauth'
 
 
 # For renaming skeleton project

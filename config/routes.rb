@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :users
 
-  devise_for :users, controllers: { sessions: 'users/sessions' }
+  namespace :api do
+    scope :v1 do
+      mount_devise_token_auth_for 'User', at: 'auth'
+    end
+  end
   resources :users
   mount API::Base, at: "/"
   mount GrapeSwaggerRails::Engine, at: "/documentation", as: 'apidocs'

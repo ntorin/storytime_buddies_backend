@@ -14,8 +14,10 @@ module RailsReactTemplate
     config.middleware.use Rack::Cors do
       allow do
         origins "*"
-        resource "*", headers: :any, methods: [:get,
-                                               :post, :put, :delete, :options]
+        resource "*",
+                 headers: :any,
+                 expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+                 methods: [:get, :post, :put, :delete, :options]
       end
     end
     config.active_record.raise_in_transactional_callbacks = true
