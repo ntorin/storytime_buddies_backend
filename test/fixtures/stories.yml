@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  passage: MyText
+  editing: false
+  completed: false
+  likes: 1
+
+two:
+  name: MyString
+  passage: MyText
+  editing: false
+  completed: false
+  likes: 1

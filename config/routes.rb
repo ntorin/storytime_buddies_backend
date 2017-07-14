@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :library_comments
+  resources :messages
+  resources :lobbies
+  resources :stories
   devise_for :users
 
   namespace :api do

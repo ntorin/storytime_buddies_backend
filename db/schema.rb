@@ -10,10 +10,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170616202019) do
+ActiveRecord::Schema.define(version: 20170714171714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "library_comments", force: :cascade do |t|
+    t.text     "comment"
+    t.integer  "likes"
+    t.integer  "story_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lobbies", force: :cascade do |t|
+    t.string   "password"
+    t.integer  "word_limit"
+    t.integer  "master_user_id"
+    t.integer  "members"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "lobbies_users", id: false, force: :cascade do |t|
+    t.integer "user_id",  null: false
+    t.integer "lobby_id", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "message"
+    t.integer  "lobby_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stories", force: :cascade do |t|
+    t.string   "name"
+    t.text     "passage"
+    t.boolean  "editing"
+    t.boolean  "completed"
+    t.integer  "likes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stories_users", id: false, force: :cascade do |t|
+    t.integer "user_id",  null: false
+    t.integer "story_id", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "provider",               default: "email", null: false

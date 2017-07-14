@@ -1,0 +1,2 @@
+class LibraryComment < ApplicationRecord
+end
