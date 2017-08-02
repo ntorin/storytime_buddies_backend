@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @lobby_message.message %>
+</p>
+
+<p>
+  <strong>Lobby:</strong>
+  <%= @lobby_message.lobby_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @lobby_message.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_lobby_message_path(@lobby_message) %> |
+<%= link_to 'Back', lobby_messages_path %>

@@ -17,7 +17,7 @@ class LobbiesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create lobby" do
     assert_difference('Lobby.count') do
-      post lobbies_url, params: { lobby: { master_user_id: @lobby.master_user_id, members: @lobby.members, password: @lobby.password, word_limit: @lobby.word_limit } }
+      post lobbies_url, params: { lobby: { has_password: @lobby.has_password, master_user_id: @lobby.master_user_id, members: @lobby.members, name: @lobby.name, password: @lobby.password, word_limit: @lobby.word_limit } }
     end
 
     assert_redirected_to lobby_url(Lobby.last)
@@ -34,7 +34,7 @@ class LobbiesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update lobby" do
-    patch lobby_url(@lobby), params: { lobby: { master_user_id: @lobby.master_user_id, members: @lobby.members, password: @lobby.password, word_limit: @lobby.word_limit } }
+    patch lobby_url(@lobby), params: { lobby: { has_password: @lobby.has_password, master_user_id: @lobby.master_user_id, members: @lobby.members, name: @lobby.name, password: @lobby.password, word_limit: @lobby.word_limit } }
     assert_redirected_to lobby_url(@lobby)
   end
 

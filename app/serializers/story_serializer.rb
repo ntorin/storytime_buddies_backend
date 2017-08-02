@@ -1,3 +1,3 @@
 class StorySerializer < ActiveModel::Serializer
-  attributes :id, :name, :passage, :editing, :completed, :likes
+  attributes :id, :name, :author_id, :passage, :editing, :completed, :likes
 end

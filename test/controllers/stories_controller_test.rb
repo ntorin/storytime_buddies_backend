@@ -17,7 +17,7 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create story" do
     assert_difference('Story.count') do
-      post stories_url, params: { story: { completed: @story.completed, editing: @story.editing, likes: @story.likes, name: @story.name, passage: @story.passage } }
+      post stories_url, params: { story: { author_id: @story.author_id, completed: @story.completed, editing: @story.editing, likes: @story.likes, name: @story.name, passage: @story.passage } }
     end
 
     assert_redirected_to story_url(Story.last)
@@ -34,7 +34,7 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update story" do
-    patch story_url(@story), params: { story: { completed: @story.completed, editing: @story.editing, likes: @story.likes, name: @story.name, passage: @story.passage } }
+    patch story_url(@story), params: { story: { author_id: @story.author_id, completed: @story.completed, editing: @story.editing, likes: @story.likes, name: @story.name, passage: @story.passage } }
     assert_redirected_to story_url(@story)
   end
 

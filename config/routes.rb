@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  resources :chat_messages
   resources :library_comments
-  resources :messages
+  resources :lobby_messages
   resources :lobbies
   resources :stories
   devise_for :users
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
   namespace :api do
     scope :v1 do
       mount_devise_token_auth_for 'User', at: 'auth'
+      mount API::V1::Lobbies, at: 'lobbies'
     end
   end
   resources :users

@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Author</th>
       <th>Passage</th>
       <th>Editing</th>
       <th>Completed</th>
@@ -18,6 +19,7 @@
     <% @stories.each do |story| %>
       <tr>
         <td><%= story.name %></td>
+        <td><%= story.author_id %></td>
         <td><%= story.passage %></td>
         <td><%= story.editing %></td>
         <td><%= story.completed %></td>

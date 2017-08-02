@@ -12,6 +12,16 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :has_password %>
+    <%= f.check_box :has_password %>
+  </div>
+
+  <div class="field">
     <%= f.label :password %>
     <%= f.text_field :password %>
   </div>

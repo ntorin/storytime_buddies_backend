@@ -5,6 +5,8 @@
 <table>
   <thead>
     <tr>
+      <th>Name</th>
+      <th>Has password</th>
       <th>Password</th>
       <th>Word limit</th>
       <th>Master user</th>
@@ -16,6 +18,8 @@
   <tbody>
     <% @lobbies.each do |lobby| %>
       <tr>
+        <td><%= lobby.name %></td>
+        <td><%= lobby.has_password %></td>
         <td><%= lobby.password %></td>
         <td><%= lobby.word_limit %></td>
         <td><%= lobby.master_user_id %></td>

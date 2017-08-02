@@ -69,6 +69,6 @@ class LobbiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lobby_params
-      params.require(:lobby).permit(:password, :word_limit, :master_user_id, :members)
+      params.require(:lobby).permit(:name, :has_password, :password, :word_limit, :master_user_id, :members)
     end
 end
