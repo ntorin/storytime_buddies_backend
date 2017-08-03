@@ -37,10 +37,6 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bootstrap-sass'
 
-# react-rails isn't compatible yet with latest Sprockets.
-# https://github.com/reactjs/react-rails/pull/322
-gem 'react-rails', github: 'vipulnsward/react-rails', branch: 'sprockets-3-compat'
-
 # Add support to use es6 based on top of babel, instead of using coffeescript
 gem 'sprockets-es6'
 
