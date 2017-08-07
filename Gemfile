@@ -38,6 +38,12 @@ gem 'jbuilder', '~> 2.5'
 # save app config
 gem 'figaro'
 
+
+gem 'bootstrap-sass'
+
+# Add support to use es6 based on top of babel, instead of using coffeescript
+gem 'sprockets-es6'
+
 # APIs
 gem 'grape'
 gem 'rack-cors', :require => 'rack/cors'
