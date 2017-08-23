@@ -61,6 +61,36 @@ class LobbiesController < ApplicationController
     end
   end
 
+  # POST /lobbies/join/:id
+  def join
+    lobby = Lobby.find(params[:id])
+    lobby.update(members: lobby.members+1)
+
+    lobbyuser = LobbyUser.create(lobby_id: params[:id], user_id: params[:user_id])
+
+
+    render json: lobbyuser
+  end
+
+  # POST /lobbies/leave/:id
+  def leave
+    lobby = Lobby.find(params[:id])
+    lobby.update(members: lobby.members-1)
+
+    lobbyuser = LobbyUser.where(lobby_id: params[:id], user_id: params[:user_id])
+    lobbyuser.destroy
+
+    render json: lobby
+
+  end
+
+  # POST /lobbies/search/:query
+  def search
+    lobbies = Lobby.where("LOWER(name) LIKE ?", '%' + params[:query].downcase + '%')
+
+    render json: lobbies
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_lobby

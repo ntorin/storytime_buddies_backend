@@ -10,6 +10,7 @@ class Ability
       can :read, :all
     end
     if user.user?
+
     end
   end
 end

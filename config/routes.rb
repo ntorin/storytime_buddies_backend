@@ -25,6 +25,10 @@ Rails.application.routes.draw do
 
   get 'home/index'
 
+  post 'lobbies/join/:id', to: 'lobbies#join'
+  post 'lobbies/leave/:id', to: 'lobbies#leave'
+  post 'lobbies/search/:query', to: 'lobbies#search'
+
   #get 'users', to: 'users/users#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

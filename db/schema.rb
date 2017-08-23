@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170802084614) do
+ActiveRecord::Schema.define(version: 20170823111450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,15 @@ ActiveRecord::Schema.define(version: 20170802084614) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "lobby_users", force: :cascade do |t|
+    t.integer  "lobby_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lobby_id"], name: "index_lobby_users_on_lobby_id", using: :btree
+    t.index ["user_id"], name: "index_lobby_users_on_user_id", using: :btree
+  end
+
   create_table "stories", force: :cascade do |t|
     t.string   "name"
     t.integer  "author_id"
@@ -70,6 +79,24 @@ ActiveRecord::Schema.define(version: 20170802084614) do
   create_table "stories_users", id: false, force: :cascade do |t|
     t.integer "user_id",  null: false
     t.integer "story_id", null: false
+  end
+
+  create_table "story_users", force: :cascade do |t|
+    t.integer  "story_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["story_id"], name: "index_story_users_on_story_id", using: :btree
+    t.index ["user_id"], name: "index_story_users_on_user_id", using: :btree
+  end
+
+  create_table "user_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["friend_id"], name: "index_user_users_on_friend_id", using: :btree
+    t.index ["user_id"], name: "index_user_users_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

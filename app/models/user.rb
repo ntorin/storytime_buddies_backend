@@ -12,4 +12,12 @@ class User < ApplicationRecord
     self.role ||= :user
   end
 
+  has_many :lobbies, :through => :lobby_users
+  has_many :stories, :through => :story_users
+  has_many :friends, :class_name => 'User', :through => :user_users
+
+  before_validation :set_provider
+  before_validation :set_uid
+
+
 end
