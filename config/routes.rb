@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   resources :users
   mount API::Base, at: "/"
   mount GrapeSwaggerRails::Engine, at: "/documentation", as: 'apidocs'
+  mount ActionCable.server => '/cable'
+
 
   devise_scope :user do
     get 'login', to: 'devise/sessions#new'
