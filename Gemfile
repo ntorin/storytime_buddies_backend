@@ -62,6 +62,8 @@ gem 'omniauth'
 gem 'rename'
 gem 'faker'
 
+gem 'redis'
+
 
 
 group :development, :test do
