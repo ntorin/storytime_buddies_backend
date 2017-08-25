@@ -60,6 +60,4 @@
 #     # password: "please use keys"
 #   }
 
-config.action_cable.disable_request_forgery_protection = true
-
 server '13.59.214.6', user: 'deploy', roles: %w{web app db}

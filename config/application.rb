@@ -21,5 +21,6 @@ module StorytimeBuddies
       end
     end
     config.active_record.raise_in_transactional_callbacks = true
+    config.action_cable.disable_request_forgery_protection = true
   end
 end
