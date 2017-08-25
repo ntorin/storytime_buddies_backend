@@ -83,4 +83,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  config.action_cable.disable_request_forgery_protection = true
+  config.action_cable.allowed_request_origins = [ /http:\/\/.*/, /https:\/\/.*/ ]
+  config.web_socket_server_url = "ws://ec2-13-59-214-6.us-east-2.compute.amazonaws.com/cable"
 end
