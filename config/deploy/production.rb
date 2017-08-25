@@ -59,5 +59,7 @@
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
+Rails.application.config.action_cable.disable_request_forgery_protection = true
+Rails.applcation.config.action_cable.allowed_request_origins = [ /http:\/\/.*/, /https:\/\/.*/ ]
 
 server '13.59.214.6', user: 'deploy', roles: %w{web app db}
