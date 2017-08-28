@@ -61,6 +61,11 @@ class LobbyMessagesController < ApplicationController
     end
   end
 
+  def send
+    lobby_message = LobbyMessage.create(params[:message], params[:lobby_id], params[:user_id], params[:username])
+    ActionCable.server.broadcast("lobby_#{params[:lobby_id]}", lobby_message)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_lobby_message
