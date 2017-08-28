@@ -30,7 +30,6 @@ Rails.application.routes.draw do
   post 'lobbies/join/:id', to: 'lobbies#join'
   post 'lobbies/leave/:id', to: 'lobbies#leave'
   post 'lobbies/search/:query', to: 'lobbies#search'
-  post 'lobby_messages/send', to: 'lobbymessages#send'
 
   #get 'users', to: 'users/users#index'
 

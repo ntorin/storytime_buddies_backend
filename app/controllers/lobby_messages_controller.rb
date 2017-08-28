@@ -26,10 +26,12 @@ class LobbyMessagesController < ApplicationController
   def create
     @lobby_message = LobbyMessage.new(lobby_message_params)
 
+
     respond_to do |format|
       if @lobby_message.save
         format.html { redirect_to @lobby_message, notice: 'Lobby message was successfully created.' }
         format.json { render :show, status: :created, location: @lobby_message }
+        ActionCable.server.broadcast("lobby_#{@lobby_message.lobby_id}", @lobby_message)
       else
         format.html { render :new }
         format.json { render json: @lobby_message.errors, status: :unprocessable_entity }
@@ -59,11 +61,6 @@ class LobbyMessagesController < ApplicationController
       format.html { redirect_to lobby_messages_url, notice: 'Lobby message was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  def send
-    lobby_message = LobbyMessage.create(params[:message], params[:lobby_id], params[:user_id])
-    ActionCable.server.broadcast("lobby_#{params[:lobby_id]}", lobby_message)
   end
 
   private
