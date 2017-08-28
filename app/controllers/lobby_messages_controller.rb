@@ -62,7 +62,7 @@ class LobbyMessagesController < ApplicationController
   end
 
   def send
-    lobby_message = LobbyMessage.create(params[:message], params[:lobby_id], params[:user_id], params[:username])
+    lobby_message = LobbyMessage.create(params[:message], params[:lobby_id], params[:user_id])
     ActionCable.server.broadcast("lobby_#{params[:lobby_id]}", lobby_message)
   end
 
