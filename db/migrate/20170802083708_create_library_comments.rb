@@ -5,6 +5,7 @@ class CreateLibraryComments < ActiveRecord::Migration[5.0]
       t.integer :likes
       t.integer :story_id
       t.integer :user_id
+      t.string :username
 
       t.timestamps
     end

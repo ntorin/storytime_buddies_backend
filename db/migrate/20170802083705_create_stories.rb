@@ -7,6 +7,7 @@ class CreateStories < ActiveRecord::Migration[5.0]
       t.boolean :editing
       t.boolean :completed
       t.integer :likes
+      t.integer :views
 
       t.timestamps
     end

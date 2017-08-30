@@ -61,6 +61,25 @@ class LibraryCommentsController < ApplicationController
     end
   end
 
+  # POST /library_comments/like/:id
+  def like
+    like = LibraryCommentLike.where("library_comment_id = ? AND user_id = ?", params[:id], params[:user_id])
+
+    if like.blank?
+      story = LibraryComment.where("id = ?", params[:id])
+      story.likes += 1
+
+      LibraryCommentLike.create(params[:id], params[:user_id])
+    else
+      story = LibraryComment.where("id = ?", params[:id])
+      story.likes -= 1
+
+      like.first.destroy
+    end
+
+    render json: { status: :ok}
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_library_comment

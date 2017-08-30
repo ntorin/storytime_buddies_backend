@@ -61,6 +61,60 @@ class StoriesController < ApplicationController
     end
   end
 
+  # POST /stories/retrieve
+  # sort: recent, popular
+  # offset: starting point
+  # limit: ending point
+  # query: search query
+  def retrieve
+    sort = 'created_at ASC'
+
+    case params[:sort]
+      when 'recent'
+        sort = 'created_at ASC'
+      when 'popular'
+        sort = 'views ASC'
+      else
+
+    end
+
+    stories = Story.where("LOWER(name) LIKE ?", '%' + params[:query].downcase + '%').order(sort).offset(params[:offset]).limit(params[:limit])
+
+    render json: stories
+  end
+
+  # POST /stories/like/:id
+  def like
+    like = StoryLike.where("story_id = ? AND user_id = ?", params[:id], params[:user_id])
+
+    if like.blank?
+      story = Story.where("id = ?", params[:id])
+      story.likes += 1
+
+      StoryLike.create(params[:id], params[:user_id])
+    else
+      story = Story.where("id = ?", params[:id])
+      story.likes -= 1
+
+      like.first.destroy
+    end
+
+    render json: { status: :ok}
+  end
+
+  # POST /stories/display/:id
+  def display
+    story = Story.where("id = ?", params[:id])
+    like = StoryLike.where("story_id = ? AND user_id = ?", params[:id], params[:user_id])
+
+    is_liked = true
+    if like.blank?
+      is_liked = false
+    end
+
+    render json: {story: story, is_liked: is_liked}
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_story

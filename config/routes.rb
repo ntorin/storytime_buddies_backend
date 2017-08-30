@@ -27,9 +27,28 @@ Rails.application.routes.draw do
 
   get 'home/index'
 
+  post 'users/friends/:id', to: 'users#friends'
+  post 'users/add_friend/:id', to: 'users#add_friend'
+  post 'users/remove_friend/:id', to: 'users#remove_friend'
+  post 'users/stories/:id', to: 'users#stories'
+  post 'users/comments/:id', to: 'users#comments'
+
   post 'lobbies/join/:id', to: 'lobbies#join'
   post 'lobbies/leave/:id', to: 'lobbies#leave'
   post 'lobbies/search/:query', to: 'lobbies#search'
+  post 'lobbies/members/:id', to: 'lobbies#members'
+  post 'lobbies/rename/:id', to: 'lobbies#rename'
+  post 'lobbies/complete/:id', to: 'lobbies#complete'
+  post 'lobbies/abandon/:id', to: 'lobbies#abandon'
+  post 'lobbies/edit_password/:id', to: 'lobbies#edit_password'
+  post 'lobbies/append_story/:id', to: 'lobbies#append_story'
+  post 'lobbies/select_story/:id', to: 'lobbies#select_story'
+
+  post 'stories/retrieve/', to: 'stories#retrieve'
+  post 'stories/like/:id', to: 'stories#like'
+  post 'stories/display/:id', to: 'stories#display'
+
+
 
   #get 'users', to: 'users/users#index'
 

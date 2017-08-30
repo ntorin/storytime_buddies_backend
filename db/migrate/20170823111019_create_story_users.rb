@@ -3,6 +3,7 @@ class CreateStoryUsers < ActiveRecord::Migration[5.0]
     create_table :story_users do |t|
       t.belongs_to :story, index: true
       t.belongs_to :user, index: true
+      t.string :username
 
       t.timestamps
     end

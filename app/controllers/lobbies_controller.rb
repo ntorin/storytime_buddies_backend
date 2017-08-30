@@ -69,18 +69,29 @@ class LobbiesController < ApplicationController
     lobbyuser = LobbyUser.create(lobby_id: params[:id], user_id: params[:user_id])
 
 
+    members = LobbyUser.where("lobby_id = ?", params[:id])
+
+    ActionCable.server.broadcast("lobby_#{params[:id]}", {members: members, action: 'ActionJoin'})
     render json: lobbyuser
   end
 
   # POST /lobbies/leave/:id
   def leave
     lobby = Lobby.find(params[:id])
-    lobby.update(members: lobby.members-1)
+
+    if lobby.members-1 < 1
+      lobby.destroy
+    else
+      lobby.update(members: lobby.members-1)
+    end
 
     lobbyuser = LobbyUser.where(lobby_id: params[:id], user_id: params[:user_id])
     lobbyuser.destroy
 
-    render json: lobby
+    members = LobbyUser.where("lobby_id = ?", params[:id])
+
+    ActionCable.server.broadcast("lobby_#{params[:id]}", {members: members, action: 'ActionLeave'})
+    render json: { status: :ok}
 
   end
 
@@ -89,6 +100,84 @@ class LobbiesController < ApplicationController
     lobbies = Lobby.where("LOWER(name) LIKE ?", '%' + params[:query].downcase + '%')
 
     render json: lobbies
+  end
+
+  # POST /lobbies/members/:id
+  def members
+    members = LobbyUser.where("lobby_id = ?", params[:id])
+
+    render json: members
+  end
+
+  # POST /lobbies/rename/:id
+  def rename
+    lobby = Lobby.where("id = ?", params[:id])
+    lobby.update(name: params[:name])
+
+    ActionCable.server.broadcast("lobby_#{params[:id]}", {lobbyname: params[:name], action: 'ActionRename'})
+    render json: { status: :ok}
+  end
+
+  # POST /lobbies/complete/:id
+  def complete
+    lobby = Lobby.where("id = ?", params[:id])
+    story = Story.where("id = ?", lobby.story_id)
+    story.update(editing: false, completed: true)
+    lobby.update(story_id: nil)
+
+    ActionCable.server.broadcast("lobby_#{params[:id]}", {lobby: lobby, action: 'ActionComplete'})
+
+    render json: { status: :ok}
+  end
+
+  # POST /lobbies/abandon/:id
+  def abandon
+    lobby = Lobby.where("id = ?", params[:id])
+    story = Story.where("id = ?", lobby.story_id)
+    story.update(editing: false, completed: false)
+    lobby.update(story_id: nil)
+
+    ActionCable.server.broadcast("lobby_#{params[:id]}", {lobby: lobby, action: 'ActionAbandon'})
+
+    render json: { status: :ok}
+  end
+
+  # POST /lobbies/edit_password/:id
+  def edit_password
+    lobby = Lobby.where("id = ?", params[:id])
+
+    if params[:password].empty?
+      lobby.update(has_password: false, password: '')
+    else
+      lobby.update(has_password: true, password: params[:password])
+    end
+
+    ActionCable.server.broadcast("lobby_#{params[:id]}", {lobby: lobby, action: 'ActionEditPassword'})
+
+    render json: { status: :ok}
+  end
+
+  # POST /lobbies/append_story/:id
+  def append_story
+    lobby = Lobby.where("id = ?", params[:id])
+    story = Story.where("id = ?", lobby.story_id)
+    passage = story.passage
+    passage << ' ' + params[:storyInput]
+    story.update(passage: passage)
+
+    ActionCable.server.broadcast("lobby_#{params[:id]}", {lobby: lobby, action: 'ActionAppendStory'})
+
+    render json: { status: :ok}
+  end
+
+  # POST /lobbies/select_story/:id
+  def select_story
+    lobby = Lobby.where("id = ?", params[:id])
+    lobby.update(story_id: params[:story_id])
+
+    ActionCable.server.broadcast("lobby_#{params[:id]}", {lobby: lobby, action: 'ActionSelectStory'})
+
+    render json: { status: :ok}
   end
 
   private
