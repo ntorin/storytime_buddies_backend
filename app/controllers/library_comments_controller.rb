@@ -30,6 +30,7 @@ class LibraryCommentsController < ApplicationController
       if @library_comment.save
         format.html { redirect_to @library_comment, notice: 'Library comment was successfully created.' }
         format.json { render :show, status: :created, location: @library_comment }
+        ActionCable.server.broadcast("lobby_#{@library_comment.story_id}", @library_comment)
       else
         format.html { render :new }
         format.json { render json: @library_comment.errors, status: :unprocessable_entity }
