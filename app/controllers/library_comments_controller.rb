@@ -61,6 +61,13 @@ class LibraryCommentsController < ApplicationController
     end
   end
 
+  # POST /library_comments/retrieve/:story_id
+  def retrieve
+    comments = LibraryComment.where("story_id = ?", params[:story_id])
+
+    render json: comments
+  end
+
   # POST /library_comments/like/:id
   def like
     like = LibraryCommentLike.where("library_comment_id = ? AND user_id = ?", params[:id], params[:user_id])
