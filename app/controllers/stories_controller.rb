@@ -73,7 +73,7 @@ class StoriesController < ApplicationController
       when 'recent'
         sort = 'created_at DESC'
       when 'popular'
-        sort = 'views ASC'
+        sort = 'views DESC, likes DESC'
       else
 
     end
