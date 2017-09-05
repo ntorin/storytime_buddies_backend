@@ -26,7 +26,7 @@
   2.upto(5) do |j|
     LibraryComment.create([{comment: Faker::Lorem.sentence, likes: Random.rand(0..500), story_id: i, user_id: j},
                            {comment: Faker::Lorem.sentence, likes: Random.rand(0..500), story_id: i, user_id: j}])
-    ChatMessage.create([{message: "Test message #" << i << " from User" << j, sender_id: j, recipient_id: 1, connection_id: j - 1, username: "User" << j},
+    ChatMessage.create([{message: 'Test message #' << i << ' from User' << j, sender_id: j, recipient_id: 1, connection_id: j - 1, username: 'User' << j},
                        ])
   end
 end

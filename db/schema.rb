@@ -19,9 +19,10 @@ ActiveRecord::Schema.define(version: 20170830131945) do
     t.text     "message"
     t.integer  "sender_id"
     t.integer  "recipient_id"
+    t.integer  "connection_id"
     t.string   "username"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "library_comment_likes", force: :cascade do |t|
@@ -105,6 +106,7 @@ ActiveRecord::Schema.define(version: 20170830131945) do
     t.integer  "user_id"
     t.integer  "friend_id"
     t.string   "username"
+    t.string   "friendname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["friend_id"], name: "index_user_users_on_friend_id", using: :btree
