@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   post 'lobbies/append_story/:id', to: 'lobbies#append_story'
   post 'lobbies/select_story/:id', to: 'lobbies#select_story'
 
-  post 'stories/retrieve/:sort', to: 'stories#retrieve'
+  post 'stories/retrieve/', to: 'stories#retrieve'
   post 'stories/like/:id', to: 'stories#like'
   post 'stories/display/:id', to: 'stories#display'
 
