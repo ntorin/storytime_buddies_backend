@@ -67,11 +67,11 @@ class StoriesController < ApplicationController
   # limit: ending point
   # query: search query
   def retrieve
-    sort = 'created_at ASC'
+    sort = 'created_at DESC'
 
     case params[:sort]
       when 'recent'
-        sort = 'created_at ASC'
+        sort = 'created_at DESC'
       when 'popular'
         sort = 'views ASC'
       else
@@ -123,6 +123,6 @@ class StoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def story_params
-      params.require(:story).permit(:name, :author_id, :passage, :editing, :completed, :likes)
+      params.require(:story).permit(:name, :author_id, :passage, :editing, :completed, :likes, :views)
     end
 end
