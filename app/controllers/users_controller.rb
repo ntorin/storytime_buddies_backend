@@ -39,6 +39,7 @@ class UsersController < ApplicationController
   # POST /users/add_friend/:id
   def add_friend
     connection = UserUser.create(user_id: params[:id], friend_id: params[:friend_id])
+    connection.update(connection_id: connection.id)
     chatmessages = ChatMessage.where("(sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)",
                                      params[:id], params[:friend_id], params[:id], params[:friend_id])
     chatmessages.update(connection_id: connection.id)

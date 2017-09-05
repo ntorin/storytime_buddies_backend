@@ -6,17 +6,39 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-30.times do |i|
-  Story.create([{name: Faker::Book.title, author_id: 0, passage: Faker::Lorem.paragraph, editing: false,
-                 completed: true, likes: Random.new(100)},
-                {name: Faker::Book.title, author_id: 1, passage: Faker::Lorem.paragraph, editing: false,
-                 completed: true, likes: Random.new(100)}])
-  Lobby.create([{name: Faker::Coffee.blend_name, has_password: false, password: '', word_limit: Random.new(30),
-                master_user_id: 0, members: 0, story_id: i},
-                {name: Faker::Coffee.blend_name, has_password: true, password: 'test', word_limit: Random.new(30),
-                 master_user_id: 1, members: 0, story_id: i}])
-  5.times do |j|
-    LibraryComment.create([{comment: Faker::Lorem.sentence, likes: Random.new(500), story_id: i, user_id: 0},
-                           {comment: Faker::Lorem.sentence, likes: Random.new(500), story_id: i, user_id: 1}])
+1.upto(10) do |i|
+  Story.create([{name: Faker::Book.title, author_id: i, passage: Faker::Lorem.paragraph, editing: false,
+                 completed: true, likes: Random.rand(0..100), views: Random.rand(0..1000)},
+                {name: Faker::Book.title, author_id: i, passage: Faker::Lorem.paragraph, editing: false,
+                 completed: false, likes: Random.rand(0..100), views: Random.rand(0..1000)}])
+
+  StoryUser.create([{story_id: i, user_id: 1, username: 'User1'},
+                    {story_id: i, user_id: 2, username: 'User2'},
+                    {story_id: i, user_id: 3, username: 'User3'},
+                    {story_id: i, user_id: 4, username: 'User4'},
+                    {story_id: i, user_id: 5, username: 'User5'},
+                    {story_id: i, user_id: 6, username: 'User6'},
+                    {story_id: i, user_id: 7, username: 'User7'},
+                    {story_id: i, user_id: 8, username: 'User8'},
+                    {story_id: i, user_id: 9, username: 'User9'},
+                    {story_id: i, user_id: 10, username: 'User10'},
+                   ])
+  2.upto(5) do |j|
+    LibraryComment.create([{comment: Faker::Lorem.sentence, likes: Random.rand(0..500), story_id: i, user_id: j},
+                           {comment: Faker::Lorem.sentence, likes: Random.rand(0..500), story_id: i, user_id: j}])
+    ChatMessage.create([{message: "Test message #" + i + " from User" + j, sender_id: j, recipient_id: 1, connection_id: j - 1, username: "User" + j},
+                       ])
   end
 end
+
+UserUser.create([
+                 {user_id: 1, friend_id: 2, username: 'User2'},
+                 {user_id: 1, friend_id: 3, username: 'User3'},
+                 {user_id: 1, friend_id: 4, username: 'User4'},
+                 {user_id: 1, friend_id: 5, username: 'User5'},
+                 {user_id: 1, friend_id: 6, username: 'User6'},
+                 {user_id: 1, friend_id: 7, username: 'User7'},
+                 {user_id: 1, friend_id: 8, username: 'User8'},
+                 {user_id: 1, friend_id: 9, username: 'User9'},
+                 {user_id: 1, friend_id: 10, username: 'User10'},
+                ])
