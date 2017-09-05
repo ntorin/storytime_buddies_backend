@@ -61,7 +61,7 @@ class StoriesController < ApplicationController
     end
   end
 
-  # POST /stories/retrieve
+  # POST /stories/retrieve/:query
   # sort: recent, popular
   # offset: starting point
   # limit: ending point
