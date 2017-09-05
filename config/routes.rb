@@ -48,7 +48,7 @@ Rails.application.routes.draw do
   post 'stories/like/:id', to: 'stories#like'
   post 'stories/display/:id', to: 'stories#display'
 
-  post 'library_comments/retrieve/:story_id', to: 'library_comments#retrieve'
+  get 'library_comments/retrieve/:story_id', to: 'library_comments#retrieve'
 
 
 
