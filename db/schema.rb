@@ -107,8 +107,12 @@ ActiveRecord::Schema.define(version: 20170830131945) do
     t.integer  "friend_id"
     t.string   "username"
     t.string   "friendname"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "last_message"
+    t.datetime "last_message_at"
+    t.integer  "user_unread"
+    t.integer  "friend_unread"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.index ["friend_id"], name: "index_user_users_on_friend_id", using: :btree
     t.index ["user_id"], name: "index_user_users_on_user_id", using: :btree
   end

@@ -30,7 +30,7 @@ class ChatMessagesController < ApplicationController
       if @chat_message.save
         format.html { redirect_to @chat_message, notice: 'Chat message was successfully created.' }
         format.json { render :show, status: :created, location: @chat_message }
-        connection = UserUser.where("id = ?", @chat_message.connection_id)
+        connection = UserUser.where("id = ?", @chat_message.connection_id).first
         connection.last_message = @chat_message.message
         connection.last_message_at = DateTime.now.to_datetime
         connection.save
@@ -81,6 +81,6 @@ class ChatMessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def chat_message_params
-      params.require(:chat_message).permit(:message, :sender_id, :recipient_id)
+      params.require(:chat_message).permit(:message, :sender_id, :recipient_id, :connection_id)
     end
 end
