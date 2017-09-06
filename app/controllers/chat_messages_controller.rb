@@ -30,6 +30,10 @@ class ChatMessagesController < ApplicationController
       if @chat_message.save
         format.html { redirect_to @chat_message, notice: 'Chat message was successfully created.' }
         format.json { render :show, status: :created, location: @chat_message }
+        connection = UserUser.where("id = ?", @chat_message.connection_id)
+        connection.last_message = @chat_message.message
+        connection.last_message_at = DateTime.now.to_datetime
+        connection.save
         ActionCable.server.broadcast("chat_#{@chat_message.connection_id}", @chat_message)
       else
         format.html { render :new }

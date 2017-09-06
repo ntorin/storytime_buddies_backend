@@ -5,6 +5,8 @@ class CreateUserUsers < ActiveRecord::Migration[5.0]
       t.belongs_to :friend, class_name: 'User', index: true
       t.string :username
       t.string :friendname
+      t.text :last_message
+      t.datetime :last_message_at
 
       t.timestamps
     end

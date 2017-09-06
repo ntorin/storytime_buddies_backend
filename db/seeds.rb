@@ -5,8 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
+Story.delete_all
+StoryUser.delete_all
+LibraryComment.delete_all
+ChatMessage.delete_all
+UserUser.delete_all
 1.upto(10) do |i|
+
   Story.create([{name: Faker::Book.title, author_id: i, passage: Faker::Lorem.paragraph, editing: false,
                  completed: true, likes: Random.rand(0..100), views: Random.rand(0..1000)},
                 {name: Faker::Book.title, author_id: i, passage: Faker::Lorem.paragraph, editing: false,
@@ -32,13 +37,13 @@
 end
 
 UserUser.create([
-                 {user_id: 1, friend_id: 2, username: 'User2'},
-                 {user_id: 1, friend_id: 3, username: 'User3'},
-                 {user_id: 1, friend_id: 4, username: 'User4'},
-                 {user_id: 1, friend_id: 5, username: 'User5'},
-                 {user_id: 1, friend_id: 6, username: 'User6'},
-                 {user_id: 1, friend_id: 7, username: 'User7'},
-                 {user_id: 1, friend_id: 8, username: 'User8'},
-                 {user_id: 1, friend_id: 9, username: 'User9'},
-                 {user_id: 1, friend_id: 10, username: 'User10'},
+                 {user_id: 1, friend_id: 2, username: 'User1', friendname: 'User2'},
+                 {user_id: 1, friend_id: 3, username: 'User1', friendname: 'User3'},
+                 {user_id: 1, friend_id: 4, username: 'User1', friendname: 'User4'},
+                 {user_id: 1, friend_id: 5, username: 'User1', friendname: 'User5'},
+                 {user_id: 1, friend_id: 6, username: 'User1', friendname: 'User6'},
+                 {user_id: 1, friend_id: 7, username: 'User1', friendname: 'User7'},
+                 {user_id: 1, friend_id: 8, username: 'User1', friendname: 'User8'},
+                 {user_id: 1, friend_id: 9, username: 'User1', friendname: 'User9'},
+                 {user_id: 1, friend_id: 10, username: 'User1', friendname: 'User10'},
                 ])
