@@ -5,11 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Story.delete_all
-StoryUser.delete_all
-LibraryComment.delete_all
-ChatMessage.delete_all
-UserUser.delete_all
+
+[Story, StoryUser, LibraryComment, ChatMessage, UserUser].each do |table|
+  ActiveRecord::Base.connection.execute("TRUNCATE #{table.table_name}")
+end
+
 1.upto(10) do |i|
 
   Story.create([{name: Faker::Book.title, author_id: i, passage: Faker::Lorem.paragraph, editing: false,

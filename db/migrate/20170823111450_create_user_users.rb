@@ -7,6 +7,8 @@ class CreateUserUsers < ActiveRecord::Migration[5.0]
       t.string :friendname
       t.text :last_message
       t.datetime :last_message_at
+      t.integer :user_unread
+      t.integer :friend_unread
 
       t.timestamps
     end
