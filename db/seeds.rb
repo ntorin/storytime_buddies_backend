@@ -8,6 +8,7 @@
 
 [Story, StoryUser, LibraryComment, ChatMessage, UserUser].each do |table|
   ActiveRecord::Base.connection.execute("TRUNCATE #{table.table_name}")
+  ActiveRecord::Base.connection.reset_pk_sequence!(table.table_name)
 end
 
 1.upto(10) do |i|
