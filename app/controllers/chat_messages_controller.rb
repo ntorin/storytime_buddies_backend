@@ -68,7 +68,7 @@ class ChatMessagesController < ApplicationController
 
   # POST /chat_messages/retrieve/:connection_id
   def retrieve
-    messages = ChatMessage.where("connection_id = ?", params[:connection_id])
+    messages = ChatMessage.where("connection_id = ?", params[:connection_id]).order('created_at DESC')
 
     render json: messages
   end
