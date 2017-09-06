@@ -62,6 +62,13 @@ class ChatMessagesController < ApplicationController
     end
   end
 
+  # POST /chat_messages/retrieve/:connection_id
+  def retrieve
+    messages = ChatMessage.where("connection_id = ?", params[:connection_id])
+
+    render json: messages
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_chat_message

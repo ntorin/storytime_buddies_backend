@@ -50,6 +50,8 @@ Rails.application.routes.draw do
 
   get 'library_comments/retrieve/:story_id', to: 'library_comments#retrieve'
 
+  get 'chat_messages/retrieve/:connection_id', to: 'chat_messages#retrieve'
+
 
 
   #get 'users', to: 'users/users#index'
