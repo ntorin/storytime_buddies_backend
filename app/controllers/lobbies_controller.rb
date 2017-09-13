@@ -112,9 +112,10 @@ class LobbiesController < ApplicationController
   # POST /lobbies/rename/:id
   def rename
     lobby = Lobby.where("id = ?", params[:id])
-    lobby.update(name: params[:name])
+    story = Story.where("id = ?", lobby.story_id)
+    story.update(name: params[:name])
 
-    ActionCable.server.broadcast("lobby_#{params[:id]}", {lobbyname: params[:name], action: 'ActionRename'})
+    ActionCable.server.broadcast("lobby_#{params[:id]}", {story: story, action: 'ActionRename'})
     render json: { status: :ok}
   end
 
@@ -162,10 +163,10 @@ class LobbiesController < ApplicationController
     lobby = Lobby.where("id = ?", params[:id])
     story = Story.where("id = ?", lobby.story_id)
     passage = story.passage
-    passage << ' ' + params[:storyInput]
+    passage << ' ' << params[:story_input]
     story.update(passage: passage)
 
-    ActionCable.server.broadcast("lobby_#{params[:id]}", {lobby: lobby, action: 'ActionAppendStory'})
+    ActionCable.server.broadcast("lobby_#{params[:id]}", {story: story, action: 'ActionAppendStory'})
 
     render json: { status: :ok}
   end

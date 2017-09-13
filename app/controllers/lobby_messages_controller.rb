@@ -31,7 +31,7 @@ class LobbyMessagesController < ApplicationController
       if @lobby_message.save
         format.html { redirect_to @lobby_message, notice: 'Lobby message was successfully created.' }
         format.json { render :show, status: :created, location: @lobby_message }
-        ActionCable.server.broadcast("lobby_#{@lobby_message.lobby_id}", @lobby_message)
+        ActionCable.server.broadcast("lobby_#{@lobby_message.lobby_id}", {message: @lobby_message, action: 'ActionMessage'})
       else
         format.html { render :new }
         format.json { render json: @lobby_message.errors, status: :unprocessable_entity }
