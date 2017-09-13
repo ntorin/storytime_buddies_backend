@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   post 'users/stories/:id', to: 'users#stories'
   post 'users/comments/:id', to: 'users#comments'
 
+  post 'lobbies/create_room', to: 'lobbies#create_room'
   post 'lobbies/join/:id', to: 'lobbies#join'
   post 'lobbies/leave/:id', to: 'lobbies#leave'
   post 'lobbies/search/:query', to: 'lobbies#search'
