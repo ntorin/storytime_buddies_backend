@@ -111,8 +111,8 @@ class LobbiesController < ApplicationController
 
   # POST /lobbies/rename/:id
   def rename
-    lobby = Lobby.where("id = ?", params[:id])
-    story = Story.where("id = ?", lobby.story_id)
+    lobby = Lobby.find(params[:id])
+    story = Story.find(lobby.story_id)
     story.update(name: params[:name])
 
     ActionCable.server.broadcast("lobby_#{params[:id]}", {story: story, action: 'ActionRename'})
@@ -121,8 +121,8 @@ class LobbiesController < ApplicationController
 
   # POST /lobbies/complete/:id
   def complete
-    lobby = Lobby.where("id = ?", params[:id])
-    story = Story.where("id = ?", lobby.story_id)
+    lobby = Lobby.find(params[:id])
+    story = Story.find(lobby.story_id)
     story.update(editing: false, completed: true)
     lobby.update(story_id: nil)
 
@@ -133,8 +133,8 @@ class LobbiesController < ApplicationController
 
   # POST /lobbies/abandon/:id
   def abandon
-    lobby = Lobby.where("id = ?", params[:id])
-    story = Story.where("id = ?", lobby.story_id)
+    lobby = Lobby.find(params[:id])
+    story = Story.find(lobby.story_id)
     story.update(editing: false, completed: false)
     lobby.update(story_id: nil)
 
@@ -145,7 +145,7 @@ class LobbiesController < ApplicationController
 
   # POST /lobbies/edit_password/:id
   def edit_password
-    lobby = Lobby.where("id = ?", params[:id])
+    lobby = Lobby.find(params[:id])
 
     if params[:password].empty?
       lobby.update(has_password: false, password: '')
@@ -160,8 +160,8 @@ class LobbiesController < ApplicationController
 
   # POST /lobbies/append_story/:id
   def append_story
-    lobby = Lobby.where("id = ?", params[:id])
-    story = Story.where("id = ?", lobby.story_id)
+    lobby = Lobby.find(params[:id])
+    story = Story.find(lobby.story_id)
     passage = story.passage
     passage << ' ' << params[:story_input]
     story.update(passage: passage)
@@ -173,7 +173,7 @@ class LobbiesController < ApplicationController
 
   # POST /lobbies/select_story/:id
   def select_story
-    lobby = Lobby.where("id = ?", params[:id])
+    lobby = Lobby.find(params[:id])
     lobby.update(story_id: params[:story_id])
 
     ActionCable.server.broadcast("lobby_#{params[:id]}", {lobby: lobby, action: 'ActionSelectStory'})
