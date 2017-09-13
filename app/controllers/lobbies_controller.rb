@@ -61,6 +61,15 @@ class LobbiesController < ApplicationController
     end
   end
 
+  # POST /lobbies/create_room
+  def create_room
+    lobby =  Lobby.create(lobby_params)
+    story = Story.create(name: 'Untitled', author_id: params[:master_user_id], passage: '', editing: true, completed: false, likes: 0, views: 0)
+    lobby.update(story_id: story.id)
+
+    render json: lobby
+  end
+
   # POST /lobbies/join/:id
   def join
     lobby = Lobby.find(params[:id])
@@ -189,6 +198,6 @@ class LobbiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lobby_params
-      params.require(:lobby).permit(:name, :has_password, :password, :word_limit, :master_user_id, :members)
+      params.require(:lobby).permit(:name, :story_id, :has_password, :password, :word_limit, :master_user_id, :members)
     end
 end
